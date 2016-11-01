@@ -5,7 +5,8 @@ package com.robbomb.pegs;
  */
 public class PegNode {
 
-    private boolean pegged;
+    private String name;
+    private boolean pegged = true;
 
     private PegNode a;
     private PegNode b;
@@ -14,10 +15,11 @@ public class PegNode {
     private PegNode e;
     private PegNode f;
 
+    public PegNode(String name) {
+        this.name = name;
+    }
 
-
-
-    /*          f     a
+/*          f     a
                  \   /
                   \ /
               e ---o--- b
@@ -80,5 +82,13 @@ public class PegNode {
 
     public void setF(PegNode f) {
         this.f = f;
+    }
+
+    @Override
+    public String toString() {
+        return "PegNode{" +
+                "name='" + name + '\'' +
+                ", pegged=" + pegged +
+                '}';
     }
 }

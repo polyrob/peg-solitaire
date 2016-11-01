@@ -6,11 +6,19 @@ package com.robbomb.pegs;
 public class PegsMain {
 
     public static void main(String[] args) {
-        PegTree pegTree = new PegTree();
+        // Build PegTree data structure
+        PegTree pegTree = new PegTree(5);
 
-        for (int i = 0; i < 14; i++) {
-            pegTree.addNode();
-        }
+        // set initial missing pin
+        pegTree.getRoot().setPegged(false);
+
+
+        // print the current possible moves for the board
+        pegTree.printMoves();
+
+
+
+
 
         System.out.println(pegTree);
     }
