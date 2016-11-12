@@ -8,9 +8,9 @@ import java.util.Deque;
  */
 public class Solver {
 
-    Deque<String> moveStack = new ArrayDeque<>();
+    private Deque<String> moveStack = new ArrayDeque<>();
 
-    public void solve(PegTree pegTree) {
+    public void solveFewestRemaining(PegTree pegTree) {
 
         PegNode node = pegTree.getRoot();
         boolean hadMove = false;
@@ -30,7 +30,7 @@ public class Solver {
                 node.setPegged(false);
                 n1.setPegged(false);
                 n1.getA().setPegged(true);
-                solve(pegTree);
+                solveFewestRemaining(pegTree);
                 moveStack.removeLast();
                 node.setPegged(true);
                 n1.setPegged(true);
@@ -43,7 +43,7 @@ public class Solver {
                 node.setPegged(false);
                 n1.setPegged(false);
                 n1.getB().setPegged(true);
-                solve(pegTree);
+                solveFewestRemaining(pegTree);
                 moveStack.removeLast();
                 node.setPegged(true);
                 n1.setPegged(true);
@@ -56,7 +56,7 @@ public class Solver {
                 node.setPegged(false);
                 n1.setPegged(false);
                 n1.getC().setPegged(true);
-                solve(pegTree);
+                solveFewestRemaining(pegTree);
                 moveStack.removeLast();
                 node.setPegged(true);
                 n1.setPegged(true);
@@ -69,7 +69,7 @@ public class Solver {
                 node.setPegged(false);
                 n1.setPegged(false);
                 n1.getD().setPegged(true);
-                solve(pegTree);
+                solveFewestRemaining(pegTree);
                 moveStack.removeLast();
                 node.setPegged(true);
                 n1.setPegged(true);
@@ -82,7 +82,7 @@ public class Solver {
                 node.setPegged(false);
                 n1.setPegged(false);
                 n1.getE().setPegged(true);
-                solve(pegTree);
+                solveFewestRemaining(pegTree);
                 moveStack.removeLast();
                 node.setPegged(true);
                 n1.setPegged(true);
@@ -95,7 +95,7 @@ public class Solver {
                 node.setPegged(false);
                 n1.setPegged(false);
                 n1.getF().setPegged(true);
-                solve(pegTree);
+                solveFewestRemaining(pegTree);
                 moveStack.removeLast();
                 node.setPegged(true);
                 n1.setPegged(true);
@@ -109,11 +109,9 @@ public class Solver {
                 System.out.println(" *pathway completed, pegs left: " + pegTree.countLeftPegs());
                 System.out.println("*** MOVES ***");
                 for (String s : moveStack) {
-
                     System.out.println(s);
-
                 }
-                System.out.println();
+                System.out.println(); // extra linebreak for readability
             }
 
         }

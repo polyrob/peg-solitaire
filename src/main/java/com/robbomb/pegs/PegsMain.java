@@ -6,16 +6,17 @@ package com.robbomb.pegs;
 public class PegsMain {
 
     public static void main(String[] args) {
+
         // Build PegTree data structure
-        PegTree pegTree = new PegTree(5);
+        try {
+            PegTree pegTree = new PegTree(5);
+            // set initial missing pin
+            pegTree.getPeg(1).setPegged(false);
 
-        // set initial missing pin
-        pegTree.getRoot().setPegged(false);
-
-
-        Solver solver = new Solver();
-        solver.solve(pegTree);
-
-
+            Solver solver = new Solver();
+            solver.solveFewestRemaining(pegTree);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -18,8 +18,9 @@ public class PegTree {
      * would be a triangle of 10 pins, like bowling pins. The "10" peg would be the bottom right peg in the row of 4.
      * @param size the number of "levels".
      */
-    public PegTree(int size) {
-        root = new PegNode("1");
+    public PegTree(int size) throws Exception {
+        if (size < 3) throw new Exception("Invalid size. Must be at least 3 in size");
+        root = new PegNode(1);
         lastNode = root;
         int totalNodes = getFactorial(size);
         for (int i = 1; i < totalNodes; i++) {
@@ -30,7 +31,7 @@ public class PegTree {
 
     public void addNode() {
         pegs++;
-        PegNode p = new PegNode(String.valueOf(pegs));
+        PegNode p = new PegNode(pegs);
 
         if (pegs > getFactorial(level)) {
             level++;
@@ -53,10 +54,18 @@ public class PegTree {
                 p.setA(fParent.getB());
                 fParent.getB().setD(p);
             }
-
-
         }
         lastNode = p;
+    }
+
+    public PegNode getPeg(int id) throws Exception {
+        if (id > pegs || id < 1) throw new Exception("Invalid peg Id");
+        PegNode peg = root;
+        // just iterate through until i = requested id
+        for (int i = 1; i < id; i++) {
+            peg = getNextNode(peg);
+        }
+        return peg;
     }
 
     public PegNode getLeftMost(PegNode node) {
