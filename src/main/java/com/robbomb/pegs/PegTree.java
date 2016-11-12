@@ -11,11 +11,13 @@ public class PegTree {
 
     private PegNode lastNode;
 
-    public PegTree() {
-        root = new PegNode("1");
-        lastNode = root;
-    }
 
+    /**
+     * PegTree data structure constructor.
+     * The pegs are named such that "1" is the top of the triangle, working the way down from the left. Example for "4"
+     * would be a triangle of 10 pins, like bowling pins. The "10" peg would be the bottom right peg in the row of 4.
+     * @param size the number of "levels".
+     */
     public PegTree(int size) {
         root = new PegNode("1");
         lastNode = root;
@@ -24,7 +26,6 @@ public class PegTree {
             addNode();
         }
     }
-
 
 
     public void addNode() {
@@ -64,12 +65,6 @@ public class PegTree {
     }
 
 
-    public PegNode getLastNode(PegNode node) {
-        if (node.getD() != null) return getLastNode(node.getD());
-        if (node.getB() != null) return getLastNode(node.getB());
-        return node;
-    }
-
     public PegNode getNextNode(PegNode node) {
         if (node.getB() != null) return node.getB();
         return getLeftMost(node).getD();
@@ -85,42 +80,14 @@ public class PegTree {
         return root;
     }
 
-    public void printMoves() {
-        PegNode node = root;
-        System.out.println(" *** Current moves for board. **");
-        while (node != null) {
-            // skip empty nodes
-            if (!node.isPegged()) {
-                node = getNextNode(node);
-                continue;
-            }
-
-            // check for skips in every direction
-            if (node.getA() != null && node.getA().getA() != null && node.getA().isPegged() && !node.getA().getA().isPegged()) {
-                System.out.println("Jump A route wth " + node.toString());
-            }
-
-            if (node.getB() != null && node.getB().getB() != null && node.getB().isPegged() && !node.getB().getB().isPegged()) {
-                System.out.println("Jump B route wth " + node.toString());
-            }
-
-            if (node.getC() != null && node.getC().getC() != null && node.getC().isPegged() && !node.getC().getC().isPegged()) {
-                System.out.println("Jump C route wth " + node.toString());
-            }
-
-            if (node.getD() != null && node.getD().getD() != null && node.getD().isPegged() && !node.getD().getD().isPegged()) {
-                System.out.println("Jump D route wth " + node.toString());
-            }
-
-            if (node.getE() != null && node.getE().getE() != null && node.getE().isPegged() && !node.getE().getE().isPegged()) {
-                System.out.println("Jump E route wth " + node.toString());
-            }
-
-            if (node.getF() != null && node.getF().getF() != null && node.getF().isPegged() && !node.getF().getF().isPegged()) {
-                System.out.println("Jump F route wth " + node.toString());
-            }
-
-            node = getNextNode(node);
+    public int countLeftPegs() {
+        PegNode p = root;
+        int count = 0;
+        while (p != null) {
+            if (p.isPegged()) count++;
+            p = getNextNode(p);
         }
+        return count;
     }
+
 }

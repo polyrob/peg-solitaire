@@ -13,13 +13,9 @@ public class PegsMain {
         pegTree.getRoot().setPegged(false);
 
 
-        // print the current possible moves for the board
-        pegTree.printMoves();
+        Solver solver = new Solver();
+        solver.solve(pegTree);
 
 
-
-
-
-        System.out.println(pegTree);
     }
 }
