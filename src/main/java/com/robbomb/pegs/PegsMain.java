@@ -14,7 +14,7 @@ public class PegsMain {
             pegTree.getPeg(1).setPegged(false);
 
             Solver solver = new Solver();
-            solver.solveFewestRemaining(pegTree);
+            solver.iterateSolutions(pegTree);
         } catch (Exception e) {
             e.printStackTrace();
         }
